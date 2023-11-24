@@ -84,6 +84,16 @@ const ProductScreen = () => {
     );
   };
 
+  const renderItem1 = ({ item,index }) => (
+    <View style={[styles.itemContainer]}>
+    <TouchableOpacity>
+        {/* <Ionicons name="heart-outline" size={24} color="red" style={styles.favoriteIcon} /> */}
+      </TouchableOpacity>
+      <Image source={{ uri: item.thumbnail }} style={styles.image} />
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.price}>{item.price}</Text>
+    </View>
+  );
   return (
     products?.length > 0 ? (
       <View style={styles.container}>
@@ -120,12 +130,22 @@ const ProductScreen = () => {
           renderItem={renderItem}
         />
       
-        <FlatList
+        {/* <FlatList
             style={styles.containerList}
             data={productsList}
             renderItem={renderItemList}
             contentContainerStyle={styles.listContent}
-          />
+          /> */}
+            <FlatList
+      data={productsList}
+      keyExtractor={(item) => item.id}
+      numColumns={2}
+      renderItem={renderItem1}
+      contentContainerStyle={styles.flatListContainer}
+      style={styles.flatList}
+
+    />
+    <View style={{height:60}}/>
           </View>
         ) : null}
       </View>
@@ -155,11 +175,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-  image: {
-    width: 50,
-    height: 50,
-    marginRight: 10,
-  },
+  // image: {
+  //   width: 50,
+  //   height: 50,
+  //   // marginRight: 10,
+  // },
   textContainer: {
     flex: 1,
     justifyContent: 'center',
@@ -201,6 +221,46 @@ const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor:'brown'
 
+  },
+  flatListContainer: {
+    padding: 16,
+  },
+  flatList: {
+    padding: 16,
+ },
+  itemContainer: {
+    width:'50%',
+    margin: 4,
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    padding: 16,
+    // alignItems: 'center',
+    justifyContent: 'center',
+  },
+  itemContainerRight: {
+    marginLeft: 2,
+  },
+  image: {
+    // width: 100,
+    height: 100,
+    marginBottom: 8,
+    borderRadius: 8,
+    justifyContent:'center'
+  },
+  title: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
+
+  },
+  price: {
+    fontSize: 14,
+    color: 'green',
+  },
+  favoriteIcon: {
+    position: 'absolute',
+    top: 8,
+    left: 8,
   },
 });
 
